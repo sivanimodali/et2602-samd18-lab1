@@ -40,3 +40,25 @@ elif ok_msg == "ERR wrong nick name":
     print('dont enter nick name with special characters,limit upto 12 characters')
     print('disconnecting, try with valid nickname')
     sys.exit()
+
+
+while True:
+    socket_list=[sys.stdin, server]
+    
+
+    read_sockets,write_sockets,error_sockets=select.select(socket_list,[],[])
+    
+    for sockets in read_sockets:
+        if sockets == server:
+            message = sockets.recv(2048).decode('utf-8')
+            print(message)
+        else:
+            message=sys.stdin.readline()
+            
+            message = 'MSG '+ message
+            if message == '\n':
+                continue
+            else:
+                server.sendall(message.encode('utf-8'))
+                
+server.close()
