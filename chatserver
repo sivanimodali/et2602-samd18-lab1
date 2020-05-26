@@ -102,3 +102,17 @@ def broadcasting(message,connection,nick1):
             except KeyboardInterrupt:
                     clients.remove(sockets)
                     break 
+
+
+while True:
+    conn,addr=server.accept()
+    
+    conn.sendall('Hello 1'.encode('utf-8'))
+    clients.append(conn)
+    print(addr[0]+" has connected")
+    
+    start_new_thread(clientthread,(conn,addr))
+    
+
+conn.close()
+server.close()  
