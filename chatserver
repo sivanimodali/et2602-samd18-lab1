@@ -50,7 +50,7 @@ def clientthread(conn,addr):
                 break
 
 
-     while True:
+    while True:
         try:
             if conn in clients:
                 message = conn.recv(2048).decode('utf-8')
